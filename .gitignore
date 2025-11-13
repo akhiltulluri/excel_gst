@@ -142,3 +142,7 @@ cython_debug/
 
 # DS Store 
 .DS_Store
+
+# testing
+in/*
+out/*
