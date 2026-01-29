@@ -7,10 +7,52 @@
 </head>
 <body>
   <div id="app">
-    <header class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900">GST Excel Consolidator</h1>
-      <p class="text-gray-600 mt-2">Process and consolidate GST Excel files in your browser</p>
+    <header class="mb-8 bg-gradient-to-r from-blue-50 to-green-50 p-6 rounded-lg shadow-sm">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-3xl font-bold text-gray-900 flex items-center">
+            📊 GST Excel Consolidator
+          </h1>
+          <p class="text-gray-600 mt-2">Process and consolidate GST Excel files in your browser - 100% private & secure</p>
+        </div>
+        <button id="app-info-toggle" class="text-blue-600 hover:text-blue-800 px-4 py-2 bg-white rounded-lg shadow-sm transition-colors">
+          <span class="text-2xl">?</span>
+        </button>
+      </div>
+
+      <div id="app-info-panel" class="hidden mt-4 p-4 bg-white rounded-lg border-2 border-blue-200">
+        <h3 class="font-bold text-gray-900 mb-3">🎯 How to Use</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          <div>
+            <p class="font-semibold text-blue-700 mb-1">1️⃣ Upload Files</p>
+            <p class="text-gray-600">Select or drag multiple .xlsx files with GST data</p>
+          </div>
+          <div>
+            <p class="font-semibold text-green-700 mb-1">2️⃣ Configure (Optional)</p>
+            <p class="text-gray-600">Review settings or use default configuration</p>
+          </div>
+          <div>
+            <p class="font-semibold text-purple-700 mb-1">3️⃣ Process & Download</p>
+            <p class="text-gray-600">Click "Process Files" and get consolidated output</p>
+          </div>
+        </div>
+        <div class="mt-4 pt-4 border-t border-gray-200">
+          <p class="text-xs text-gray-500">
+            <strong>🔒 Privacy:</strong> All processing happens in your browser. No data is uploaded to any server.
+          </p>
+        </div>
+      </div>
     </header>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.getElementById('app-info-toggle');
+        const panel = document.getElementById('app-info-panel');
+        toggle?.addEventListener('click', () => {
+          panel?.classList.toggle('hidden');
+        });
+      });
+    </script>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- File Uploader -->

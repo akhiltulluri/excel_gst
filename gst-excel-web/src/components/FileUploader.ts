@@ -19,17 +19,41 @@ export class FileUploader {
   private render(): void {
     this.container.innerHTML = `
       <div class="bg-white rounded-lg shadow-md p-6">
-        <h2 class="text-xl font-bold mb-4">Upload Excel Files</h2>
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="text-xl font-bold">📁 Upload Excel Files</h2>
+          <button id="info-toggle" class="text-blue-600 hover:text-blue-800 text-sm" title="Show/Hide Info">
+            ℹ️ Info
+          </button>
+        </div>
 
-        <div id="drop-zone" class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition-colors">
+        <div id="info-panel" class="hidden mb-4 p-3 bg-blue-50 border border-blue-200 rounded text-xs">
+          <p class="font-medium text-blue-900 mb-1">📝 File Requirements:</p>
+          <ul class="text-blue-800 space-y-1 ml-4 list-disc">
+            <li>Format: .xlsx files only (Excel 2007+)</li>
+            <li>Size: Max 50MB per file</li>
+            <li>Required sheets: B2B, CDNR (or as configured)</li>
+            <li>For default config: "Read me" sheet with month in cell E2</li>
+          </ul>
+          <p class="font-medium text-blue-900 mt-2 mb-1">💡 Tips:</p>
+          <ul class="text-blue-800 space-y-1 ml-4 list-disc">
+            <li>Upload multiple files at once (Ctrl/Cmd + Click)</li>
+            <li>Files will be processed in upload order</li>
+            <li>All processing happens in your browser - data stays private!</li>
+          </ul>
+        </div>
+
+        <div id="drop-zone" class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
           <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <p class="mt-2 text-sm text-gray-600">
-            Drag and drop Excel files here, or click to select
+          <p class="mt-2 text-sm font-medium text-gray-700">
+            📤 Drag and drop Excel files here
           </p>
           <p class="mt-1 text-xs text-gray-500">
-            Only .xlsx files up to 50MB
+            or click to browse files
+          </p>
+          <p class="mt-2 text-xs text-gray-400">
+            Only .xlsx files • Max 50MB each
           </p>
           <input type="file" id="file-input" class="hidden" accept=".xlsx" multiple>
         </div>
@@ -42,6 +66,13 @@ export class FileUploader {
   private attachEventListeners(): void {
     const dropZone = this.container.querySelector('#drop-zone') as HTMLElement;
     const fileInput = this.container.querySelector('#file-input') as HTMLInputElement;
+
+    // Info toggle
+    const infoToggle = this.container.querySelector('#info-toggle');
+    const infoPanel = this.container.querySelector('#info-panel');
+    infoToggle?.addEventListener('click', () => {
+      infoPanel?.classList.toggle('hidden');
+    });
 
     // Click to select files
     dropZone.addEventListener('click', () => {
